@@ -1,0 +1,52 @@
+---
+- name: Install Apache HTTP Server
+  hosts: DEV
+  become: yes  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+        enablerepo: your_optional_repository  # Optional: Specify a repository if needed
+        version: 2.4.*  # Specify the version you want to install
+
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+---
+---
+- name: Install Apache HTTP Server
+  hosts: DEV
+  become: yes  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Install httpd
+      yum:
+        name: "httpd-2.4.46*"  # Use the wildcard to match the specified version
+        state: present
+
+    - name: Start and enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+---
+- name: Uninstall Apache HTTP Server
+  hosts: DEV
+  become: yes  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Stop and disable httpd service
+      service:
+        name: httpd
+        state: stopped
+        enabled: no
+
+    - name: Remove httpd package
+      package:
+        name: httpd
+        state: absent

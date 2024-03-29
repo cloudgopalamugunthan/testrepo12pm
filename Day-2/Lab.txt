@@ -1,0 +1,136 @@
+1. Merge Conflict:
+
+What causes a Git merge conflict?
+Git can handle most merges on its own with automatic merging features. A conflict arises when two separate branches have made edits to the same line in a file, or when a file has been deleted in one branch but edited in the other. Conflicts will most likely happen when working in a team environment.
+
+To availd the pain:
+
+Merge often,keep commits small/focesed
+
+
+Need to configure this if we need to use conflict
+
+git config --global merge.toolvimdiff
+git config --global merge.conflictstyle diff3
+git config --global mergetool.prompt false
+
+Create one new dir
+vi new code
+git init
+git branch
+git branch dev
+git checkout master - From master one new dev did some changes
+git commit -am "commit without knowledge"
+git checkout dev
+git commit -am "proper second commit from feature branch"
+
+git checkout master
+git log
+git merge dev
+
+copy the config from excel
+git mergetool
+git merge dev
+git commit -am "fixed commit"
+git log
+
+*********************************************************************************************
+
+2. Git Rebase:  we need to rebase from feature branch
+
+A way to cut of a set of commits from a branch and apply those commits on another branch
+
+Golden Rule: Never rebase commits that you have pushed to a public repo, only rebase local repo.
+
+when you rebased the push branch, you are abonding exisitng commits and creating  new ones that are similar but diffrent, so you are rewritng the history.
+
+from master branch
+
+git log --oneline
+git checkout dev
+git rebase master
+
+To change the head commit
+
+git reset --hard commit id - from master we cant remove head, below head we can delete 
+****************************************************************************************************
+
+3. Cherry-pick: Bring in changes from a specfic commit
+
+Cherry picking in git means to choose a commit from one branch and apply it into another.
+
+This is contrast with other ways such as merge and rebase which normally applies many commits into another branch.
+
+Make sure you are on the branch you want to apply the commit and then use below command:
+
+git cherry-pick <commit-hash>
+
+---------------------------------------------------------------
+Usage of cherry-pick
+It is a handy tool for team collaboration.
+It is necessary in case of bug fixing because bugs are fixed and tested in the development branch with their commits.
+It is mostly used in undoing changes and restoring lost commits.
+You can avoid useless conflicts by using git cherry-pick instead of other options.
+It is a useful tool when a full branch merge is not possible due to incompatible versions in the various branches.
+The git cherry-pick is used to access the changes introduced to a sub-branch, without changing the branch.
+
+---------------------------------------------------------------
+
+mkdir cherrypick
+cd cherrypick
+vi onecode.yaml
+
+
+git add .
+git commit -m ""
+git log
+git status
+git branch featurebranch
+git checkout featurebranch
+git log --oneline
+git checkout master
+vi code and do some changes
+git commit -am ""
+do the same - one more commit
+
+git checkout fb
+git cherry-pick commitid
+git log --oneline - commit id will change content not change
+
+*********************************************************************************
+
+4. GIT Stash - stash vs staging area
+
+mkdir stash
+cd stash
+vi code
+gir stash
+git add .
+git commit -m ""
+
+do some change
+git stash
+git stash list
+git stash pop stashid
+git stash list
+
+task - git apply 
+
+Use git stash when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The command saves your local modifications away and reverts the working directory to match the HEAD commit.
+
+*************************************************************************************
+5. git fork
+Forking creates your own copy of a repository in a remote location (for example, GitHub). Your own copy means that you will be able to contribute changes to your copy of the repository without affecting the original repository. Cloning makes a local copy of a repository, not your own copy.
+
+*****************************************************************************************
+6. git clone
+
+
+
+
+
+
+
+
+
+
