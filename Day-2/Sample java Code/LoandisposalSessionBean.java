@@ -36,3 +36,4 @@ printPattern(n);
 }  
 }
 }
+}
